@@ -1,5 +1,7 @@
 <?php
 
+use \Symfony\Component\Console\Input\StringInput;
+
 require_once 'abstract.php';
 
 define('BEHAT_PHP_BIN_PATH', getenv('PHP_PEAR_PHP_BIN') ?: '/usr/bin/env php');
