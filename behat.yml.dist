@@ -11,3 +11,6 @@ default:
             selenium2: ~
             default_session: selenium2
             javascript_session: selenium2
+
+    paths:
+        bootstrap: %magento.behat_mage_dir%/bootstrap
