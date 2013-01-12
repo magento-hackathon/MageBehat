@@ -1,0 +1,13 @@
+default:
+    formatter:
+        name: progress
+    extensions:
+        MageTest\MagentoExtension\Extension: ~
+        Behat\MinkExtension\Extension:
+            base_url: %magento.base_url%
+            goutte:
+                server_parameters:
+                    HTTP_HOST: %magento.base_url%
+            selenium2: ~
+            default_session: selenium2
+            javascript_session: selenium2
