@@ -2,17 +2,32 @@
 
 require_once 'abstract.php';
 
+define('BEHAT_PHP_BIN_PATH', getenv('PHP_PEAR_PHP_BIN') ?: '/usr/bin/env php');
+define('BEHAT_BIN_PATH',     __FILE__);
+define('BEHAT_VERSION',      'DEV');
+
 class Mage_Shell_Behat extends Mage_Shell_Abstract
 {
     public function run()
     {
+        require(BP.'/vendor/autoload.php');
         $this->_validate();
+
         try {
+
             foreach (Mage::getConfig()->loadModules()->getNode('modules')->children() as $moduleName => $module) {
                 $featureDir = Mage::getConfig()->getModuleDir('', $moduleName) . DS . 'Test' . DS . 'features';
-                foreach (new DirectoryIterator($featureDir) as $featureFile) {
-                    echo $featureFile . PHP_EOL;
+                if (is_dir($featureDir)) {
+                    echo $featureDir.PHP_EOL;
+                    $app = new Behat\Behat\Console\BehatApplication(BEHAT_VERSION);
+                    $input = new StringInput('--config="'.$featureDir.'"');
+                    $app->run($input);
                 }
+                /*
+                foreach (new DirectoryIterator($featureDir) as $featureFile) {
+
+                    echo $featureFile . PHP_EOL;
+                }*/
             }
         } catch (Exception $e) {
             Mage::logException($e);
