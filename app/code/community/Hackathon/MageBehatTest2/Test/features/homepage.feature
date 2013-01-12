@@ -11,4 +11,4 @@ Feature: Home Page
   Given I set config value for "contacts/contacts/enabled" to "1" in "default" scope
   And the cache is clean
   When I am on "/"
-  Then I should see text "Contact Us"
+  Then I should see text "test2"

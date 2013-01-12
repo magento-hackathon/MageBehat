@@ -11,4 +11,4 @@ Feature: Home Page
 
   Scenario: Display Welcome Message
   Given I am on "/"
-  Then I should see text "Default welcome msg! "
+  Then I should see text "test1"

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    
+    <cms_index_index>
+        <reference name="content">
+            <block type="magebehattest1/test1" name="hackathon.magebehattest1" />
+            <block type="magebehattest2/test2" name="hackathon.magebehattest2" />
+        </reference>
+    </cms_index_index>
+    
+</layout>
