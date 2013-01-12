@@ -1,0 +1,48 @@
+{
+    "name": "magento-hackathon/magento-behat-extension",
+    "description": "MageBehat - framework to run Behat/Mink for Magento extension integration tests",
+    "type": "library",
+    "keywords": ["behat","bdd","magento"],
+    "homepage": "https://github.com/magento-hackathon/MageBehat",
+    "license": "MIT",
+    "require": {
+        "php": ">=5.3.0",
+        "behat/behat": "2.4.4",
+        "behat/mink-extension": "*",
+        "behat/mink-browserkit-driver": "*",
+        "behat/mink-selenium2-driver":"*",
+        "behat/mink-goutte-driver": ">=1.0.3",
+        "MageTest": "dev-master"
+    },
+    "repositories": [
+        {
+            "type":"package",
+            "package":{
+                "name":"MageTest",
+                "version":"master",
+                
+                "source":{
+                    "url":"https://github.com/magento-hackathon/BehatMage",
+                    "type":"git",
+                    "reference":"master"
+                }
+            }
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "MageTest": "lib/MageTest/src"
+        }
+    },
+
+    "config": {
+        "bin-dir": "bin",
+        "vendor-dir": "lib"
+    },
+    "minimum-stability": "dev"
+}
+
+
+
+
+
