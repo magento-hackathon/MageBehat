@@ -16,7 +16,10 @@ class Mage_Shell_Behat extends Mage_Shell_Abstract
         $this->_validate();
 
         try {
-
+            $contextFile = Mage::getConfig()->getModuleDir('', 'Hackathon_MageBehat') . DS . 'Test' . DS . 'Context.php';
+            if(file_exists($contextFile)) {
+                require($contextFile);
+            }
             foreach (Mage::getConfig()->loadModules()->getNode('modules')->children() as $moduleName => $module) {
                 $featureDir = Mage::getConfig()->getModuleDir('', $moduleName) . DS . 'Test' . DS . 'features';
                 if (is_dir($featureDir)) {
