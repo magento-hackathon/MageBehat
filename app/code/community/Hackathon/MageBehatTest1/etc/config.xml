@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Hackathon_MageBehatTest1>
+            <version>0.0.1</version>
+        </Hackathon_MageBehatTest1>
+    </modules>
+    <global>
+        <blocks>
+            <magebehattest1>
+                <class>Hackathon_MageBehatTest1_Block</class>
+            </magebehattest1>
+        </blocks>
+    </global>
+</config>
