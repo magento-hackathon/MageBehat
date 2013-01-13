@@ -12,7 +12,7 @@ class Mage_Shell_Behat extends Mage_Shell_Abstract
 {
     public function run()
     {
-        require(BP.'/vendor/autoload.php');
+        require(BP.'/lib/autoload.php');
         $this->_validate();
 
         try {

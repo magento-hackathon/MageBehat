@@ -1,0 +1,18 @@
+default:
+    formatter:
+        name: progress
+    extensions:
+        MageTest\MagentoExtension\Extension: ~
+        Behat\MinkExtension\Extension:
+            base_url: %magento.base_url%
+            goutte:
+                server_parameters:
+                    HTTP_HOST: %magento.base_url%
+            selenium2: ~
+            default_session: goutte
+            javascript_session: selenium2
+    context:
+        class: MageTest\MagentoExtension\Context\MagentoContext
+    paths:
+        features: features
+        bootstrap: %magento.behat_mage_dir%/bootstrap
