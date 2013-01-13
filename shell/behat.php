@@ -16,13 +16,20 @@ class Mage_Shell_Behat extends Mage_Shell_Abstract
         $this->_validate();
 
         try {
-            $contextFile = Mage::getConfig()->getModuleDir('', 'Hackathon_MageBehat') . DS . 'Test' . DS . 'Context.php';
-            if(file_exists($contextFile)) {
-                require($contextFile);
-            }
             foreach (Mage::getConfig()->loadModules()->getNode('modules')->children() as $moduleName => $module) {
                 $featureDir = Mage::getConfig()->getModuleDir('', $moduleName) . DS . 'Test' . DS . 'features';
+                $runBehat = false;
+                //only run behat once we have found at least one feature file
                 if (is_dir($featureDir)) {
+                    foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($featureDir)) as $file) {
+                        if ($file->getExtension() == 'feature') {
+                            $runBehat = true;
+                            break;
+                        }
+                    }
+                }
+
+                if ($runBehat) {
                     $app = new Behat\Behat\Console\BehatApplication(BEHAT_VERSION);
                     $input = new StringInput($featureDir);
                     $app->setAutoExit(false);

@@ -12,7 +12,6 @@ default:
             default_session: goutte
             javascript_session: selenium2
     context:
-        class: MageTest\MagentoExtension\Context\MagentoContext
+        class: Hackathon_MageBehat_Test_FeatureContext
     paths:
-        features: features
-        bootstrap: %magento.behat_mage_dir%/bootstrap
+        features:  %magento.behat_mage_dir%/features
