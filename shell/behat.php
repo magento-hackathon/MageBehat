@@ -16,17 +16,27 @@ class Mage_Shell_Behat extends Mage_Shell_Abstract
         $this->_validate();
 
         try {
-            $contextFile = Mage::getConfig()->getModuleDir('', 'Hackathon_MageBehat') . DS . 'Test' . DS . 'Context.php';
-            if(file_exists($contextFile)) {
-                require($contextFile);
-            }
             foreach (Mage::getConfig()->loadModules()->getNode('modules')->children() as $moduleName => $module) {
                 $featureDir = Mage::getConfig()->getModuleDir('', $moduleName) . DS . 'Test' . DS . 'features';
+                $runBehat = false;
+                //only run behat once we have found at least one feature file
                 if (is_dir($featureDir)) {
+                    foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($featureDir)) as $file) {
+                        if ($file->getExtension() == 'feature') {
+                            $runBehat = true;
+                            break;
+                        }
+                    }
+                }
+
+                if ($runBehat) {
+                    //TODO: work out a way to pass this through the application
+                    Mage::register('magebehat/current_module', $moduleName);
                     $app = new Behat\Behat\Console\BehatApplication(BEHAT_VERSION);
                     $input = new StringInput($featureDir);
                     $app->setAutoExit(false);
                     $app->run($input);
+                    Mage::unregister('magebehat/current_module');
                 }
             }
         } catch (Exception $e) {
@@ -59,7 +69,6 @@ class Mage_Shell_Behat extends Mage_Shell_Abstract
         return <<<USAGE
 Usage:  php -f shell/behat.php -- [options]
 
-  -r            Output renderer (default is php_sapi_name())
   -h            Short alias for help
   help          This help
 
