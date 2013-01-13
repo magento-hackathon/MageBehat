@@ -69,7 +69,6 @@ class Mage_Shell_Behat extends Mage_Shell_Abstract
         return <<<USAGE
 Usage:  php -f shell/behat.php -- [options]
 
-  -r            Output renderer (default is php_sapi_name())
   -h            Short alias for help
   help          This help
 
