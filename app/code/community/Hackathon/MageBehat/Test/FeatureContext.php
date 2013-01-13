@@ -113,4 +113,20 @@ class Hackathon_MageBehat_Test_FeatureContext extends MagentoContext {
             $fixtureGenerator->create($row);
         }
     }
+    
+    /**
+     * @When /^I press Button with onclick "([^"]*)"$/
+     */
+    public function iPressButtonWithOnclick($arg1)
+    {
+        $this->getSession()->getDriver()->click('//button[@onClick="'.$arg1.'"]');
+    }
+    
+    /**
+     * @Given /^I wait for "([^"]*)" Seconds$/
+     */
+    public function iWaitForSeconds($arg1)
+    {
+        sleep($arg1);
+    }
 }
