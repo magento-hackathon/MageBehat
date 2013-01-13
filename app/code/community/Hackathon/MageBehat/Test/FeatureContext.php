@@ -13,12 +13,15 @@ class Hackathon_MageBehat_Test_FeatureContext extends MagentoContext {
 
         $moduleName = Mage::registry('magebehat/current_module');
         $dir = \Mage::getConfig()->getModuleDir('', $moduleName);
-        $className = $moduleName.'_Test_FeatureContext';
-        $fileName = $dir . DS . 'Test' . DS . 'FeatureContext.php';
-        if(file_exists($fileName)){
-            require_once($fileName);
-            $this->useContext('subcontext',new $className);
+        if($moduleName != 'Hackathon_MageBehat'){
+            $className = $moduleName.'_Test_FeatureContext';
+            $fileName = $dir . DS . 'Test' . DS . 'FeatureContext.php';
+            if(file_exists($fileName)){
+                require_once($fileName);
+                $this->useContext('subcontext',new $className);
+            }
         }
+
 
     }
     /**
