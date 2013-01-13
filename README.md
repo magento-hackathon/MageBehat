@@ -5,6 +5,7 @@ Behat Integration for Magento + Magento Extensions
 ## Installation
 1. [Install composer](http://getcomposer.org/doc/01-basic-usage.md#installation)
 2. Install all dependencies: `composer install`
+
 		curl http://getcomposer.org/installer | php
 		php composer.phar install
 
@@ -28,9 +29,11 @@ Hackathon_MageBehatTest1/Test/FeatureContext.php
 
 ## Usage
 1. Start Selenium2 
+		
 		java -jar selenium-server-standalone.jar
 
 2. Run Features from Magento root folder
+
 		php -f shell/behat.php
 
 ## Ideas
