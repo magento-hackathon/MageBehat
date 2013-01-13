@@ -30,10 +30,13 @@ class Mage_Shell_Behat extends Mage_Shell_Abstract
                 }
 
                 if ($runBehat) {
+                    //TODO: work out a way to pass this through the application
+                    Mage::register('magebehat/current_module', $moduleName);
                     $app = new Behat\Behat\Console\BehatApplication(BEHAT_VERSION);
                     $input = new StringInput($featureDir);
                     $app->setAutoExit(false);
                     $app->run($input);
+                    Mage::unregister('magebehat/current_module');
                 }
             }
         } catch (Exception $e) {

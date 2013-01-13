@@ -10,10 +10,16 @@ class Hackathon_MageBehat_Test_FeatureContext extends MagentoContext {
 
     public function __construct(array$parameters)
     {
-        $dir = \Mage::getConfig()->getModuleDir('', 'Hackathon_MageBehatTest1');
-        require_once($dir . DS . 'Test' . DS . 'Context.php');
-        $inst = new Hackathon_MageBehatTest1_Test_Context();
-        $this->useContext('test1', $inst);
+
+        $moduleName = Mage::registry('magebehat/current_module');
+        $dir = \Mage::getConfig()->getModuleDir('', $moduleName);
+        $className = $moduleName.'_Test_Context';
+        $fileName = $dir . DS . 'Test' . DS . 'Context.php';
+        if(file_exists($fileName)){
+            require_once($dir . DS . 'Test' . DS . 'Context.php');
+            $this->useContext('subcontext',new $className);
+        }
+
     }
     /**
      * @Given /^I log in as admin user "([^"]*)" identified by "([^"]*)"$/
