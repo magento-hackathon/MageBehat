@@ -12,3 +12,13 @@ Feature: Home Page
   Scenario: Display Welcome Message
   Given I am on "/"
   Then I should see text "test1"
+
+  @javascript
+  Scenario: Display Welcome Message
+    Given I am on "/contacts/"
+    Then I should see text "contacts"
+
+
+  Scenario: Display Welcome Message
+    Given I am on "/"
+    Then I should be able to click a poll
