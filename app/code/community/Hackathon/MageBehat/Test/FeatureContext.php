@@ -2,28 +2,40 @@
 
 use MageTest\MagentoExtension\Context\MagentoContext as MagentoContext;
 
-use Behat\Mink\Exception\ExpectationException,
-    Behat\Gherkin\Node\TableNode;
+use Behat\Mink\Exception\ExpectationException;
+
+use Behat\MinkExtension\Context\RawMinkContext,
+    Behat\MinkExtension\Context\MinkContext;
+
+use Behat\Gherkin\Node\TableNode;
+
+use Behat\Behat\Exception\ErrorException;
 
 /**
  * Features context.
  */
 class Hackathon_MageBehat_Test_FeatureContext extends MagentoContext {
 
-    public function __construct(array$parameters)
+    public function __construct(array $parameters)
     {
 
         $moduleName = Mage::registry('magebehat/current_module');
         $dir = \Mage::getConfig()->getModuleDir('', $moduleName);
-        if($moduleName != 'Hackathon_MageBehat'){
-            $className = $moduleName.'_Test_FeatureContext';
+        if ($moduleName != 'Hackathon_MageBehat') {
+            $className = $moduleName . '_Test_FeatureContext';
             $fileName = $dir . DS . 'Test' . DS . 'FeatureContext.php';
-            if(file_exists($fileName)){
+            if (file_exists($fileName)) {
                 require_once($fileName);
-                $this->useContext('subcontext',new $className);
+                $subcontext = new $className();
+                if (!$subcontext instanceof RawMinkContext) {
+                    throw new ErrorException(E_USER_ERROR, 'Please extend your feature context directly from \Behat\MinkExtension\Context\RawMinkContext', $fileName, 0);
+                }
+                if ($subcontext instanceof MinkContext) {
+                    throw new ErrorException(E_USER_ERROR, 'Definitions of MinkContext are already loaded please extend your feature context directly from \Behat\MinkExtension\Context\RawMinkContext', $fileName, 0);
+                }
+                $this->useContext('subcontext', $subcontext);
             }
         }
-
 
     }
     /**
