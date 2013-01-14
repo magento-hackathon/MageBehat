@@ -2,6 +2,8 @@
 
 use MageTest\MagentoExtension\Context\MagentoContext as MagentoContext;
 
+use Behat\Mink\Exception\ExpectationException,
+    Behat\Gherkin\Node\TableNode;
 
 /**
  * Features context.
@@ -109,14 +111,14 @@ class Hackathon_MageBehat_Test_FeatureContext extends MagentoContext {
             if (isset($row['is_in_stock'])) {
                 $row['stock_data']['is_in_stock'] = $row['is_in_stock'];
             }
-            if (isset($row['is_in_stock'])) {
+            if (isset($row['qty'])) {
                 $row['stock_data']['qty'] = $row['qty'];
             }
             $row['website_ids'] = array(1);
             $fixtureGenerator->create($row);
         }
     }
-    
+
     /**
      * @When /^I press Button with onclick "([^"]*)"$/
      */
