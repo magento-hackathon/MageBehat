@@ -134,4 +134,16 @@ class Hackathon_MageBehat_Test_FeatureContext extends MagentoContext {
     {
         sleep($arg1);
     }
+
+    /**
+     * @Then /^I should get a "([^"]*)" status$/
+     */
+    public function iShouldGetAStatus($expectedCode)
+    {
+        $actualCode = $this->getSession()->getDriver()->getStatusCode();
+        if ($actualCode != $expectedCode) {
+            $message = sprintf('Current page returned "%s", but "%s" expected.', $actualCode, $expectedCode);
+            throw new ExpectationException($message, $this->getSession());
+        }
+    }
 }

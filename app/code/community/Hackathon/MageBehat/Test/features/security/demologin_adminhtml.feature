@@ -1,7 +1,4 @@
-Feature: Index Page
-  As a website administrator
-  I want to see the index page
-  So that I can understand what the website offers and how it can benefit me
+Feature: Unsafe admin login
 
   Scenario: Display Header
     Given I am on "/admin"
