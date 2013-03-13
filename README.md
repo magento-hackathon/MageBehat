@@ -23,6 +23,9 @@ Place a behat context file in your extension directory Test/FeatureContext.php t
 Example:
 Hackathon_MageBehatExample1/Test/FeatureContext.php
 
+Example:
+[MageAttack] (https://github.com/Schrank/mage-attack/pull/9)
+
 ## Implemented Features
 - Magento Frontend
 	- Cart 	
