@@ -15,12 +15,13 @@ Behat Integration for Magento + Magento Extensions
 As an extension developer you are able to place your feature descriptions in your extension directory's Test/features folder.
 
 Example:
-Hackathon_MageBehatTest1/Test/features/homepage.feature
+Hackathon_MageBehatExample1/Test/features/homepage.feature
+see https://github.com/fooman/MageBehatExamples
 
 Place a behat context file in your extension directory Test/FeatureContext.php to use an extra context (sub context), which is used only for your extension.
 
 Example:
-Hackathon_MageBehatTest1/Test/FeatureContext.php
+Hackathon_MageBehatExample1/Test/FeatureContext.php
 
 ## Implemented Features
 - Magento Frontend
