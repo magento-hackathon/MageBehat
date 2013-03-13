@@ -2,7 +2,8 @@
 <config>
     <modules>
         <Hackathon_MageBehat>
-            <version>0.0.1</version>
+            <active>true</active>
+            <codePool>community</codePool>
         </Hackathon_MageBehat>
-    </modules>
+    </modules>    
 </config>
