@@ -24,7 +24,7 @@ Example:
 Hackathon_MageBehatExample1/Test/FeatureContext.php
 
 Example:
-[MageAttack] (https://github.com/Schrank/mage-attack/pull/9)
+[MageAttack] (https://github.com/Schrank/mage-attack)
 
 ## Implemented Features
 - Magento Frontend
