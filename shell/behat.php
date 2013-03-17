@@ -16,6 +16,7 @@ class Mage_Shell_Behat extends Mage_Shell_Abstract
     {
         require(BP.'/lib/autoload.php');
         $this->_validate();
+        $this->init();
 
         try {
             foreach (Mage::getConfig()->loadModules()->getNode('modules')->children() as $moduleName => $module) {
@@ -54,8 +55,6 @@ class Mage_Shell_Behat extends Mage_Shell_Abstract
         if (strpos($argString, self::BY_MAGE_MODULE) !== false) {
             $argString = str_replace(self::BY_MAGE_MODULE, '', $argString);
             if (strpos($argString, '--out') !== false) {
-                $varBehatFolder = Mage::getBaseDir('var') . DS . 'behat';
-                Mage::getConfig()->getOptions()->createDirIfNotExists($varBehatFolder);
                 $argString = str_replace('--out=', '--out=var' . DS . 'behat' . DS . $moduleName, $argString);
             } else {
                 $argString .= ' --out=var' . DS . 'behat' . DS . $moduleName;
@@ -65,6 +64,12 @@ class Mage_Shell_Behat extends Mage_Shell_Abstract
             $argString .= ' ';
         }
         return $argString;
+    }
+
+    protected function init()
+    {
+        $varBehatFolder = Mage::getBaseDir('var') . DS . 'behat';
+        Mage::getConfig()->getOptions()->createDirIfNotExists($varBehatFolder);
     }
 
     protected function _validate()
