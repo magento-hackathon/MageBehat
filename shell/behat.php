@@ -33,7 +33,7 @@ class Mage_Shell_Behat extends Mage_Shell_Abstract
                     //TODO: work out a way to pass this through the application
                     Mage::register('magebehat/current_module', $moduleName);
                     $app = new Behat\Behat\Console\BehatApplication(BEHAT_VERSION);
-                    $input = new StringInput($featureDir);
+                    $input = new StringInput($this->getArgs().$featureDir);
                     $app->setAutoExit(false);
                     $app->run($input);
                     Mage::unregister('magebehat/current_module');
@@ -44,6 +44,16 @@ class Mage_Shell_Behat extends Mage_Shell_Abstract
         }
     }
 
+    protected function getArgs()
+    {
+        $args = $_SERVER['argv'];
+        array_shift($args); //name of script itself
+        $argString = implode(' ', $args);
+        if (sizeof($argString) > 0) {
+            $argString .= ' ';
+        }
+        return $argString;
+    }
 
     protected function _validate()
     {
@@ -71,6 +81,28 @@ Usage:  php -f shell/behat.php -- [options]
 
   -h            Short alias for help
   help          This help
+
+  Behat Arguments
+  --init
+  -f|--format="..."
+  --out="..."
+  --lang="..."
+  --[no-]ansi
+  --[no-]time
+  --[no-]paths
+  --[no-]snippets
+  --[no-]snippets-paths
+  --[no-]multiline
+  --[no-]expand
+  --story-syntax
+  -d|--definitions="..."
+  --name="..."
+  --tags="..."
+  --cache="..."
+  --strict
+  --dry-run
+  --rerun="..."
+  --append-snippets
 
 USAGE;
     }
