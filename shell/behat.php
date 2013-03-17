@@ -58,7 +58,7 @@ class Mage_Shell_Behat extends Mage_Shell_Abstract
                 Mage::getConfig()->getOptions()->createDirIfNotExists($varBehatFolder);
                 $argString = str_replace('--out=', '--out=var' . DS . 'behat' . DS . $moduleName, $argString);
             } else {
-                $argString .= '--out=var' . DS . 'behat' . DS . $moduleName;
+                $argString .= ' --out=var' . DS . 'behat' . DS . $moduleName;
             }
         }
         if (sizeof($argString) > 0) {
