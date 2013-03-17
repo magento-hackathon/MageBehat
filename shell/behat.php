@@ -22,7 +22,7 @@ class Mage_Shell_Behat extends Mage_Shell_Abstract
                 //only run behat once we have found at least one feature file
                 if (is_dir($featureDir)) {
                     foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($featureDir)) as $file) {
-                        if ($file->getExtension() == 'feature') {
+                        if (pathinfo($file->getFilename(), PATHINFO_EXTENSION) == 'feature') {
                             $runBehat = true;
                             break;
                         }
