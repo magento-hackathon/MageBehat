@@ -10,6 +10,8 @@ define('BEHAT_VERSION',      'DEV');
 
 class Mage_Shell_Behat extends Mage_Shell_Abstract
 {
+    const BY_MAGE_MODULE = '--by-mage-module';
+
     public function run()
     {
         require(BP.'/lib/autoload.php');
@@ -33,7 +35,7 @@ class Mage_Shell_Behat extends Mage_Shell_Abstract
                     //TODO: work out a way to pass this through the application
                     Mage::register('magebehat/current_module', $moduleName);
                     $app = new Behat\Behat\Console\BehatApplication(BEHAT_VERSION);
-                    $input = new StringInput($this->getArgs().$featureDir);
+                    $input = new StringInput($this->getArgs($moduleName).$featureDir);
                     $app->setAutoExit(false);
                     $app->run($input);
                     Mage::unregister('magebehat/current_module');
@@ -44,11 +46,21 @@ class Mage_Shell_Behat extends Mage_Shell_Abstract
         }
     }
 
-    protected function getArgs()
+    protected function getArgs($moduleName)
     {
         $args = $_SERVER['argv'];
         array_shift($args); //name of script itself
         $argString = implode(' ', $args);
+        if (strpos($argString, self::BY_MAGE_MODULE) !== false) {
+            $argString = str_replace(self::BY_MAGE_MODULE, '', $argString);
+            if (strpos($argString, '--out') !== false) {
+                $varBehatFolder = Mage::getBaseDir('var') . DS . 'behat';
+                Mage::getConfig()->getOptions()->createDirIfNotExists($varBehatFolder);
+                $argString = str_replace('--out=', '--out=var' . DS . 'behat' . DS . $moduleName, $argString);
+            } else {
+                $argString .= '--out=var' . DS . 'behat' . DS . $moduleName;
+            }
+        }
         if (sizeof($argString) > 0) {
             $argString .= ' ';
         }
@@ -81,6 +93,7 @@ Usage:  php -f shell/behat.php -- [options]
 
   -h            Short alias for help
   help          This help
+  --by-mage-module
 
   Behat Arguments
   --init
