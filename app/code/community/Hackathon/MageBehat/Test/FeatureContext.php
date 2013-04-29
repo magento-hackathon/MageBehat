@@ -138,7 +138,15 @@ class Hackathon_MageBehat_Test_FeatureContext extends MagentoContext {
     {
         $this->getSession()->getDriver()->click('//button[@onClick="'.$arg1.'"]');
     }
-    
+
+    /**
+     * @When /^I press input field with onclick "([^"]*)"$/
+     */
+    public function iPressInputWithOnclick($arg1)
+    {
+        $this->getSession()->getDriver()->click('//input[@onClick="'.$arg1.'"]');
+    }
+
     /**
      * @Given /^I wait for "([^"]*)" Seconds$/
      */
