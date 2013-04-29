@@ -1,0 +1,5 @@
+app/code/community/Hackathon/MageBehat/  app/code/community/Hackathon/MageBehat/
+app/etc/modules/Hackathon_MageBehat.xml  app/etc/modules/Hackathon_MageBehat.xml
+shell/behat.php                          shell/behat.php
+behat.yml.dist                           behat.yml.dist
+composer.json                            composer.json
