@@ -122,9 +122,11 @@ class Hackathon_MageBehat_Test_FeatureContext extends MagentoContext {
             $row['stock_data'] = array();
             if (isset($row['is_in_stock'])) {
                 $row['stock_data']['is_in_stock'] = $row['is_in_stock'];
+                unset($row['is_in_stock']);
             }
             if (isset($row['qty'])) {
                 $row['stock_data']['qty'] = $row['qty'];
+                unset($row['qty']);
             }
             $row['website_ids'] = array(1);
             $fixtureGenerator->create($row);
