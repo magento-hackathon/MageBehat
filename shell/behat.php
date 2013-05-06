@@ -2,7 +2,7 @@
 
 use \Symfony\Component\Console\Input\StringInput;
 
-require_once 'abstract.php';
+require_once getcwd() . '/shell/abstract.php';
 
 define('BEHAT_PHP_BIN_PATH', getenv('PHP_PEAR_PHP_BIN') ?: '/usr/bin/env php');
 define('BEHAT_BIN_PATH',     __FILE__);
@@ -14,7 +14,7 @@ class Mage_Shell_Behat extends Mage_Shell_Abstract
 
     public function run()
     {
-        require(BP.'/lib/autoload.php');
+        require_once(BP . '/lib/autoload.php');
         $this->_validate();
         $this->_init();
 
