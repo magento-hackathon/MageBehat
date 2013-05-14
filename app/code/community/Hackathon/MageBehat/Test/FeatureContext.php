@@ -60,7 +60,7 @@ class Hackathon_MageBehat_Test_FeatureContext extends MagentoContext {
             $this->getSession()->getPage()->pressButton('Login');
         }
 
-        $this->assertSession()->addressMatches('#^/admin/dashboard/.+$#');
+        $this->assertSession()->addressMatches('#/admin/dashboard/.+$#');
     }
 
 
