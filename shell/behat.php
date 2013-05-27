@@ -12,6 +12,17 @@ class Mage_Shell_Behat extends Mage_Shell_Abstract
 {
     const BY_MAGE_MODULE = '--by-mage-module';
 
+    public function __construct()
+    {
+        parent::__construct();
+        if (version_compare(Mage::getVersion(), '1.4.1.0', '<')) {
+            //TODO: investigate difference in autoloading behaviour
+            //triggers error in Behat\Behat\Formatter\FormatterManager
+            //if (class_exists($name)) {
+            error_reporting(E_ALL ^ E_WARNING);
+        }
+    }
+
     public function run()
     {
         require_once(BP . '/lib/autoload.php');
